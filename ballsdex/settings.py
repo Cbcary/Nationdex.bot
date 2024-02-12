@@ -169,17 +169,6 @@ voting:
   # the channel where your vote webhook sends vote notifications.
   vote-hook-channel: 1124417376809656330
 
-    
-# define the recurces need for fusing
-fusion:
-
-  # How many balls you need to fuse (in level order)
-  fusion-ball-need: 
-
-  # The ID if the event the result card got (in leveld order).
-  fusion-result-event: 
-
-
 # define the elements given with the /about command
 about:
 
