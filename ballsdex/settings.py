@@ -76,11 +76,6 @@ class Settings:
     bot_name: str = "BallsDex"
     players_group_cog_name: str = "balls"
 
-    # /fusion
-    fusion_levels: int = 0
-    fusion_ball_need: list[int] = field(default_factory=list)
-    fusion_result_event: list[int] = field(default_factory=list)
-
     # /about
     about_description: str = ""
     github_link: str = ""
@@ -120,10 +115,6 @@ def read_settings(path: "Path"):
     settings.vote_link = content["voting"]["vote-link"]
     settings.vote_reward_info_channel = content["voting"]["vote-reward-info-channel"]
     settings.vote_hook_channel = content["voting"]["vote-hook-channel"]
-
-    settings.fusion_levels = len(content["fusion"]["fusion-ball-need"] or [])
-    settings.fusion_ball_need = content["fusion"]["fusion-ball-need"] or []
-    settings.fusion_result_event = content["fusion"]["fusion-result-event"] or []
     
     settings.collectible_name = content["collectible-name"]
     settings.bot_name = content["bot-name"]
