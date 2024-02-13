@@ -19,11 +19,11 @@ RECTANGLE_HEIGHT = (HEIGHT // 5) * 2
 CORNERS = ((34, 261), (1393, 992))
 artwork_size = [b - a for a, b in zip(*CORNERS)]
 
-title_font = ImageFont.truetype(str(SOURCES_PATH / "ArsenicaTrial-Extrabold.ttf"), 170)
-capacity_name_font = ImageFont.truetype(str(SOURCES_PATH / "Bobby Jones Soft.otf"), 110)
-capacity_description_font = ImageFont.truetype(str(SOURCES_PATH / "OpenSans-Semibold.ttf"), 75)
-stats_font = ImageFont.truetype(str(SOURCES_PATH / "Bobby Jones Soft.otf"), 130)
-credits_font = ImageFont.truetype(str(SOURCES_PATH / "arial.ttf"), 40)
+title_font = ImageFont.truetype(str(SOURCES_PATH / "coolvetica rg.otf"), 170)
+capacity_name_font = ImageFont.truetype(str(SOURCES_PATH / "Utendo-Regular.ttf"), 110)
+capacity_description_font = ImageFont.truetype(str(SOURCES_PATH / "Roboto-Light.ttf"), 75)
+stats_font = ImageFont.truetype(str(SOURCES_PATH / "Bebas-Regular.otf"), 130)
+credits_font = ImageFont.truetype(str(SOURCES_PATH / "CaviarDreams.ttf"), 40)
 
 
 def draw_card(ball_instance: "BallInstance"):
