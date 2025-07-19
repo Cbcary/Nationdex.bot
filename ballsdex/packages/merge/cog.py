@@ -101,7 +101,7 @@ class FakeBallInstance:
 
 class Merge(commands.Cog):
     """
-    Merge multiple countryballs!
+    Merge multiple countryballs! - Made by xen64
     """
 
     def __init__(self, bot: "BallsDexBot"):
