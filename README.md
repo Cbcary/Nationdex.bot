@@ -1,4 +1,4 @@
-# BallsDex Discord Bot
+# Nationdex Discord Bot
 
 [![Discord server](https://img.shields.io/discord/1049118743101452329?color=7489d5&logo=discord&logoColor=ffffff)](https://discord.gg/Qn2Rkdkxwc)
 [![Pre-commit](https://github.com/laggron42/BallsDex-DiscordBot/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/laggron42/BallsDex-DiscordBot/actions/workflows/pre-commit.yml)
@@ -7,19 +7,27 @@
 [![Black coding style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![Patreon](https://img.shields.io/badge/Patreon-donate-orange.svg)](https://patreon.com/retke)
 
-BallsDex is a bot for collecting countryballs on Discord and exchange them with your friends!
+Nationdex is a bot for collecting countryballs on Discord and exchange them with your friends, just like any other dex, but with more freedom and less interventions.
 
-You can invite the official bot [here](https://discord.com/api/oauth2/authorize?client_id=999736048596816014&permissions=537193536&scope=bot%20applications.commands).
+You can invite our bot [here](https://discord.com/application-directory/1207017704096141312), with all the credits to [Ballsdex](https://discord.com/api/oauth2/authorize?client_id=999736048596816014&permissions=537193536&scope=bot%20applications.commands).
 
 ## Discord server
 
 For help installing the bot, questions, suggestions to improve or contributions, feel free to join the official community of developers and self-hosters!
 
+### Ballsdex Servers
+Ballsdex Developers:
+
 [![Discord server](https://discord.com/api/guilds/1255250024741212262/embed.png?style=banner3)](https://discord.gg/PKKhee4fvy)
 
-> You can also find the server of our official Ballsdex bot here:
-> 
-> [![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/Qn2Rkdkxwc)
+Ballsdex Official Server:
+
+[![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/Qn2Rkdkxwc)
+
+### Nationdex Servers
+Nationdex HQ:
+
+[![Discord server](https://discord.com/api/guilds/1118965941221466194/embed.png?style=banner3)](https://discord.gg/tKh3n5uVnm)
 
 ## Suggestions, issues and bug reports
 
@@ -33,7 +41,7 @@ More sections are added progressively.
 
 ## Supporting
 
-If you appreciate my work, you can support me on my [Patreon](https://patreon.com/retke)!
+If you appreciate Laggron's work, you can support him on his [Patreon](https://patreon.com/retke)!
 
 ## Contributing
 
