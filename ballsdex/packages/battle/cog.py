@@ -91,7 +91,7 @@ def create_disabled_buttons() -> discord.ui.View:
 
 class Battle(commands.GroupCog):
     """
-    Battle your countryballs!
+    Battle your countryballs! - Made by xen64
     """
 
     def __init__(self, bot: "BallsDexBot"):
@@ -233,7 +233,7 @@ class Battle(commands.GroupCog):
     @app_commands.command()
     async def start(self, interaction: discord.Interaction, opponent: discord.Member):
         """
-        Start a battle with a chosen user.
+        Start a battle with a chosen user. - Made by xen64
         """
         if self.battles.get(interaction.guild_id):
             await interaction.response.send_message(
@@ -275,7 +275,7 @@ class Battle(commands.GroupCog):
         self, interaction: discord.Interaction, countryball: BallInstanceTransform
     ):
         """
-        Add a countryball to a battle.
+        Add a countryball to a battle. - Made by xen64
         """
         guild_battle = self.battles.get(interaction.guild_id)
         if not guild_battle:
@@ -353,7 +353,7 @@ class Battle(commands.GroupCog):
         self, interaction: discord.Interaction, countryball: BallInstanceTransform
     ):
         """
-        Remove a countryball from battle.
+        Remove a countryball from battle. - Made by xen64
         """
         guild_battle = self.battles.get(interaction.guild_id)
         if not guild_battle:
