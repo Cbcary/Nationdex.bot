@@ -124,7 +124,7 @@ class JoinButton(View):
 @app_commands.guilds(*settings.admin_guild_ids)
 class Boss(commands.GroupCog):
     """
-    Boss commands.
+    Boss commands. - Made by moofficial
     """
 
     def __init__(self, bot: "BallsDexBot"):
@@ -204,7 +204,7 @@ class Boss(commands.GroupCog):
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def attack(self, interaction: discord.Interaction, attack_amount: int | None = None):
         """
-        Start a round where the Boss Attacks
+        Start a round where the Boss Attacks - Made by moofficial
         """
         if not self.boss_enabled:
             return await interaction.response.send_message("Boss is disabled", ephemeral=True)
@@ -241,7 +241,7 @@ class Boss(commands.GroupCog):
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def defend(self, interaction: discord.Interaction):
         """
-        Start a round where the Boss Defends
+        Start a round where the Boss Defends - Made by moofficial
         """
         if not self.boss_enabled:
             return await interaction.response.send_message("Boss is disabled", ephemeral=True)
@@ -278,7 +278,7 @@ class Boss(commands.GroupCog):
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def end_round(self, interaction: discord.Interaction):
         """
-        End the current round
+        End the current round - Made by moofficial
         """
         if not self.boss_enabled:
             return await interaction.response.send_message("Boss is disabled", ephemeral=True)
@@ -328,7 +328,7 @@ class Boss(commands.GroupCog):
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def stats(self, interaction: discord.Interaction):
         """
-        See current stats of the boss
+        See current stats of the boss - Made by moofficial
         """
         await interaction.response.defer(ephemeral=True, thinking=True)
         with open("stats.txt","w") as file:
@@ -346,7 +346,7 @@ class Boss(commands.GroupCog):
         undisqualify : bool | None = False,
         ):
         """
-        Disqualify a member from the boss
+        Disqualify a member from the boss - Made by moofficial
         """
         await interaction.response.defer(ephemeral=True, thinking=True)
         if (user and user_id) or (not user and not user_id):
@@ -412,7 +412,7 @@ class Boss(commands.GroupCog):
         special: SpecialEnabledTransform | None = None,
     ):
         """
-        Select countryball to use against the boss.
+        Select countryball to use against the boss. - Made by moofficial
         
         Parameters
         ----------
@@ -491,7 +491,7 @@ class Boss(commands.GroupCog):
     @app_commands.command()
     async def ongoing(self, interaction: discord.Interaction):
         """
-        Show your damage to the boss in the current fight.
+        Show your damage to the boss in the current fight. - Made by moofficial
         """
         await interaction.response.defer(ephemeral=True, thinking=True)
         snapshotdamage = self.usersdamage.copy()
@@ -521,7 +521,7 @@ class Boss(commands.GroupCog):
     @app_commands.checks.has_any_role(*settings.root_role_ids, *settings.admin_role_ids)
     async def ping(self, interaction: discord.Interaction, unselected: bool | None = False):
         """
-        Ping all the alive players
+        Ping all the alive players - Made by moofficial
         """
         snapshotusers = self.users.copy()
         await interaction.response.defer(ephemeral=True, thinking=True)
@@ -556,7 +556,7 @@ class Boss(commands.GroupCog):
     )
     async def conclude(self, interaction: discord.Interaction, winner: str):
         """
-        Finish the boss, conclude the Winner
+        Finish the boss, conclude the Winner - Made by moofficial
         """
         if not self.boss_enabled:
             return await interaction.response.send_message("Boss is disabled.", ephemeral=True)
