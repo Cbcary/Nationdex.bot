@@ -16,18 +16,20 @@ You can invite our bot [here](https://discord.com/application-directory/12070177
 For help installing the bot, questions, suggestions to improve or contributions, feel free to join the official community of developers and self-hosters!
 
 ### Ballsdex Servers
-Ballsdex Developers:
+**Ballsdex Developers:**
 
 [![Discord server](https://discord.com/api/guilds/1255250024741212262/embed.png?style=banner3)](https://discord.gg/PKKhee4fvy)
 
-Ballsdex Official Server:
+**Ballsdex Official Server:**
 
 [![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/Qn2Rkdkxwc)
 
-### Nationdex Servers
-Nationdex HQ:
+Ariel Aram is banned from Ballsdex server under immediate decision from **thebicfish** to take strict measures for the last involvement of both of them and some other people in the AsiaDex drama on September 2024, but we are still providing the Ballsdex official server due to our explicit association with Ballsdex.
 
-[![Discord server](https://discord.com/api/guilds/1118965941221466194/embed.png?style=banner3)](https://discord.gg/tKh3n5uVnm)
+### Nationdex Servers
+**Nationdex HQ:**
+
+[![Discord server](https://discord.com/api/guilds/1118965941221466194/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
 
 ## Suggestions, issues and bug reports
 
