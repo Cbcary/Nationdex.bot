@@ -18,24 +18,24 @@ class BlacklistViewFormat(menus.ListPageSource):
         self.bot = bot
         super().__init__(entries, per_page=1)
 
-    async def format_page(self, menu: Pages, blacklist: BlacklistHistory) -> discord.Embed:
+    async def format_page(self, menu: Pages, page: BlacklistHistory) -> discord.Embed:
         embed = discord.Embed(
             title=f"Blacklist History for {self.header}",
-            description=f"Type: {blacklist.action_type}\nReason: {blacklist.reason}",
-            timestamp=blacklist.date,
+            description=f"Type: {page.action_type}\nReason: {page.reason}",
+            timestamp=page.date,
         )
-        if blacklist.moderator_id:
-            moderator = await self.bot.fetch_user(blacklist.moderator_id)
+        if page.moderator_id:
+            moderator = await self.bot.fetch_user(page.moderator_id)
             embed.add_field(
                 name=(
                     "Blacklisted by"
-                    if blacklist.action_type == "blacklist"
+                    if page.action_type == "blacklist"
                     else "Unblacklisted by"
                 ),
                 value=f"{moderator.display_name} ({moderator.id})",
                 inline=True,
             )
-        embed.add_field(name="Action Time", value=format_dt(blacklist.date, "R"), inline=True)
+        embed.add_field(name="Action Time", value=format_dt(page.date, "R"), inline=True)
         if settings.admin_url and (player := await Player.get_or_none(discord_id=self.header)):
             embed.add_field(
                 name="\u200B",

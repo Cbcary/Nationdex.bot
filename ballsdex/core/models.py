@@ -232,7 +232,7 @@ class BallInstance(models.Model):
     )
     extra_data = fields.JSONField(default={})
 
-    class Meta:
+    class Meta:  # type: ignore[override]
         unique_together = ("player", "id")
         indexes = [
             PostgreSQLIndex(fields=("ball_id",)),
@@ -530,7 +530,7 @@ class Trade(models.Model):
     def __str__(self) -> str:
         return str(self.pk)
 
-    class Meta:
+    class Meta:  # type: ignore[override]
         indexes = [
             PostgreSQLIndex(fields=("player1_id",)),
             PostgreSQLIndex(fields=("player2_id",)),
@@ -553,7 +553,7 @@ class TradeObject(models.Model):
     def __str__(self) -> str:
         return str(self.pk)
 
-    class Meta:
+    class Meta:  # type: ignore[override]
         indexes = [
             PostgreSQLIndex(fields=("ballinstance_id",)),
             PostgreSQLIndex(fields=("player_id",)),

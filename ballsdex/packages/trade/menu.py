@@ -34,7 +34,7 @@ class TradeView(View):
         super().__init__(timeout=60 * 30)
         self.trade = trade
 
-    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"], /) -> bool:
+    async def interaction_check(self, interaction: discord.Interaction, /) -> bool:
         try:
             self.trade._get_trader(interaction.user)
         except RuntimeError:
@@ -136,7 +136,7 @@ class ConfirmView(View):
         self.trade = trade
         self.cooldown_duration = timedelta(seconds=10)
 
-    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"], /) -> bool:
+    async def interaction_check(self, interaction: discord.Interaction, /) -> bool:
         try:
             self.trade._get_trader(interaction.user)
         except RuntimeError:
@@ -423,9 +423,9 @@ class CountryballsSource(menus.ListPageSource):
     def __init__(self, entries: List[BallInstance]):
         super().__init__(entries, per_page=25)
 
-    async def format_page(self, menu: CountryballsSelector, balls: List[BallInstance]):
-        menu.set_options(balls)
-        return True  # signal to edit the page
+    async def format_page(self, menu: CountryballsSelector, page: List[BallInstance]):
+        menu.set_options(page)
+        return "Page updated."
 
 
 class CountryballsSelector(Pages):
@@ -585,9 +585,9 @@ class TradeViewSource(menus.ListPageSource):
     def __init__(self, entries: List[TradingUser]):
         super().__init__(entries, per_page=25)
 
-    async def format_page(self, menu, players: List[TradingUser]):
-        menu.set_options(players)
-        return True  # signal to edit the page
+    async def format_page(self, menu, page: List[TradingUser]):
+        menu.set_options(page)
+        return "Page updated."
 
 
 class TradeViewMenu(Pages):

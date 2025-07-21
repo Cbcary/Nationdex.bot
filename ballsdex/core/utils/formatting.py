@@ -17,24 +17,32 @@ def pagify(
     while len(in_text) > page_length:
         this_page_len = page_length
         if escape_mass_mentions:
-            this_page_len -= in_text.count("@here", 0, page_length) + in_text.count(
-                "@everyone", 0, page_length
-            )
-        closest_delim = (in_text.rfind(d, 1, this_page_len) for d in delims)
+            this_page_len -= in_text.count("@here", 0, page_length)
+            this_page_len -= in_text.count("@everyone", 0, page_length)
+
+        # First generate a list of delim positions
+        delim_positions = [in_text.rfind(d, 1, this_page_len) for d in delims]
+
         if priority:
-            closest_delim = next((x for x in closest_delim if x > 0), -1)
+            # Find the first delim that's > 0, or fallback to -1
+            closest_delim = next((x for x in delim_positions if x > 0), -1)
         else:
-            closest_delim = max(closest_delim)
+            closest_delim = max(delim_positions)
+
+        # Fallback if no delimiter found
         closest_delim = closest_delim if closest_delim != -1 else this_page_len
+
         if escape_mass_mentions:
             to_send = escape(in_text[:closest_delim], mass_mentions=True)
         else:
             to_send = in_text[:closest_delim]
-        if len(to_send.strip()) > 0:
+
+        if to_send.strip():
             yield to_send
+
         in_text = in_text[closest_delim:]
 
-    if len(in_text.strip()) > 0:
+    if in_text.strip():
         if escape_mass_mentions:
             yield escape(in_text, mass_mentions=True)
         else:

@@ -22,11 +22,12 @@ from ballsdex.core.models import balls as countryballs
 from ballsdex.settings import settings
 
 from ballsdex.core.utils.transformers import BallInstanceTransform
-from ballsdex.packages.battle.xe_battle_lib import (
-    BattleBall,
-    BattleInstance,
-    gen_battle,
-)
+# UNCOMMENT THIS IF YOU NEED BATTLE LIBRARY
+# from ballsdex.packages.battle.xe_battle_lib import (
+#   BattleBall,
+#   BattleInstance,
+#   gen_battle,
+# )
 
 from ballsdex.core.image_generator.image_gen import draw_card
 
@@ -101,7 +102,7 @@ class FakeBallInstance:
 
 class Merge(commands.Cog):
     """
-    Merge multiple countryballs! - Made by xen64
+    Merge multiple countryballs!
     """
 
     def __init__(self, bot: "BallsDexBot"):
@@ -133,27 +134,25 @@ class Merge(commands.Cog):
         collection.paste(right, (683, 0))
         
         collection.save(os.getcwd() + ball1.countryball.collection_card + '-merge.png')
-        ball_instance = FakeBallInstance(
-            shiny=ball1.shiny or ball2.shiny,
-            special_card=ball1.special_card if ball1.special_card else ball2.special_card,
+        shiny = getattr(ball1, "shiny", False) or getattr(ball2, "shiny", False)
 
+        ball_instance = BallInstance(
+            shiny=shiny,
+            special_card=ball1.special_card if ball1.special_card else ball2.special_card,
             health=health,
             attack=attack,
-
-            countryball=FakeBall(
+            countryball=Ball(
                 short_name=name,
                 capacity_name=ability,
                 capacity_description=desc,
                 credits=ball1.countryball.credits + ', ' + ball2.countryball.credits,
-                
                 collection_card=ball1.countryball.collection_card + '-merge.png',
-                
                 cached_regime=ball1.countryball.cached_regime,
                 cached_economy=ball2.countryball.cached_economy,
             )
         )
-        
-        image = draw_card(ball_instance)
+
+        image, _ = draw_card(ball_instance)  # Unpack the tuple
         buffer = io.BytesIO()
         image.save(buffer, format="png")
         buffer.seek(0)
@@ -167,4 +166,4 @@ class Merge(commands.Cog):
                 filename='card.png'
             )
         )
-        
+
