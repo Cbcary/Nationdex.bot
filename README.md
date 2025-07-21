@@ -10,7 +10,7 @@ You can invite our bot [with this link.](https://discord.com/application-directo
 
 You may join our Discord server to get help, report bugs, or just chat with other users!
 
-[![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/Qn2Rkdkxwc)
+[![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
 
 > [!IMPORTANT]
 >
