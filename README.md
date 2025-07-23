@@ -1,16 +1,16 @@
 # Nationdex Discord Bot
 
-![NationDex Banner](assets/nationdex_banner.png)
+![Nationdex Banner](assets/nationdex_banner.png)
 
-A unique BallsDex fork that aims to give best user experience without limitations, with over 100 nations to catch!
+A unique Ballsdex fork that aims to give best user experience without limitations, with over 100 nations to catch!
 
-You can invite our bot [with this link.](https://discord.com/application-directory/1207017704096141312)
+You can invite our bot [with this link](https://discord.com/application-directory/1207017704096141312).
 
 ## Discord server
 
 You may join our Discord server to get help, report bugs, or just chat with other users!
 
-[![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
+[![Discord server](https://discord.com/api/guilds/1118965941221466194/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
 
 > [!IMPORTANT]
 >
@@ -18,7 +18,7 @@ You may join our Discord server to get help, report bugs, or just chat with othe
 
 ## Supporting
 
-If you appreciate Laggron's work, you can support him on his [Patreon!](https://patreon.com/retke)
+If you appreciate Laggron's work, you can support him on his [Patreon](https://patreon.com/retke)!
 
 ## Contributing
 
