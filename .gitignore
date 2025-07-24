@@ -37,3 +37,11 @@ media
 config.yml
 docker-compose.override.yml
 admin_panel/admin_panel/settings/production.py
+
+# Mypy
+mypy.ini
+.mypy_cache
+
+# Coverage
+.coverage
+.coverage.*
