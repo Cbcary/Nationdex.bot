@@ -6,6 +6,7 @@ import random
 import string
 from datetime import datetime
 from typing import TYPE_CHECKING
+import typing
 
 import discord
 from discord.ui import Button, Modal, TextInput, View, button
@@ -43,7 +44,7 @@ class CountryballNamePrompt(Modal, title=f"Catch this {settings.collectible_name
         self.view = view
 
     async def on_error(
-        self, interaction: discord.Interaction["BallsDexBot"], error: Exception, /  # noqa: W504
+        self, interaction: discord.Interaction, error: Exception, /
     ) -> None:
         log.exception("An error occured in countryball catching prompt", exc_info=error)
         if interaction.response.is_done():
@@ -55,7 +56,7 @@ class CountryballNamePrompt(Modal, title=f"Catch this {settings.collectible_name
                 f"An error occured with this {settings.collectible_name}.",
             )
 
-    async def on_submit(self, interaction: discord.Interaction["BallsDexBot"]):
+    async def on_submit(self, interaction: discord.Interaction):
         await interaction.response.defer(thinking=True)
 
         player, _ = await Player.get_or_create(discord_id=interaction.user.id)
@@ -151,8 +152,9 @@ class BallSpawnView(View):
         self.hp_bonus: int | None = None
         self.og_id: int
 
-    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"], /) -> bool:
-        return await interaction.client.blacklist_check(interaction)
+    async def interaction_check(self, interaction: discord.Interaction, /) -> bool:
+        bot = typing.cast("BallsDexBot", interaction.client)
+        return await bot.blacklist_check(interaction) # type: ignore
 
     async def on_timeout(self):
         self.catch_button.disabled = True

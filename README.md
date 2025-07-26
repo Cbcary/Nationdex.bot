@@ -18,7 +18,7 @@ You may join our Discord server to get help, report bugs, or just chat with othe
 
 ## Supporting
 
-If you appreciate Laggron's work, you can support him on his [Patreon](https://patreon.com/retke)!
+If you appreciate Laggron's work, you can support him on his [Patreon!](https://patreon.com/retke)
 
 ## Contributing
 

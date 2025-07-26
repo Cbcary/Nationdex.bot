@@ -42,7 +42,7 @@ class AcceptTOSView(View):
             )
         )
 
-    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"]) -> bool:
+    async def interaction_check(self, interaction: discord.Interaction) -> bool:
         if interaction.user.id != self.new_player.id:
             await interaction.response.send_message(
                 "You are not allowed to interact with this menu.", ephemeral=True
@@ -56,7 +56,7 @@ class AcceptTOSView(View):
         emoji="\N{HEAVY CHECK MARK}\N{VARIATION SELECTOR-16}",
     )
     async def accept_button(
-        self, interaction: discord.Interaction["BallsDexBot"], button: discord.ui.Button
+        self, interaction: discord.Interaction, button: discord.ui.Button
     ):
         config, created = await GuildConfig.get_or_create(guild_id=interaction.guild_id)
         config.spawn_channel = self.channel.id  # type: ignore
