@@ -15,11 +15,11 @@ repos:
         args:
           - --fix=lf
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 24.10.0
+    rev: 25.1.0
     hooks:
       - id: black
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       - id: isort
         args:
@@ -27,12 +27,12 @@ repos:
           - black
           - --filter-files
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.390
+    rev: v1.1.403
     hooks:
       - id: pyright
         language_version: python3.13
         additional_dependencies:
-          - discord.py==2.5.0
+          - discord.py==2.5.2
           - cachetools
           - rich
           - Pillow
@@ -50,7 +50,7 @@ repos:
           - django_admin_inline_paginator
           - sentry-sdk[asyncpg]
   - repo: https://github.com/pycqa/flake8
-    rev: 7.2.0
+    rev: 7.3.0
     hooks:
       - id: flake8
         additional_dependencies:
