@@ -23,14 +23,14 @@ class SimpleCheckView(discord.ui.View):
         self.ctx = ctx
         self.value = False
 
-    async def interaction_check(self, interaction: discord.Interaction) -> bool:
+    async def interaction_check(self, interaction: discord.Interaction["BallsDexBot"]) -> bool:
         return interaction.user == self.ctx.author
 
     @discord.ui.button(
         style=discord.ButtonStyle.success, emoji="\N{HEAVY CHECK MARK}\N{VARIATION SELECTOR-16}"
     )
     async def confirm_button(
-        self, interaction: discord.Interaction, button: discord.ui.Button
+        self, interaction: discord.Interaction["BallsDexBot"], button: discord.ui.Button
     ):
         await interaction.response.edit_message(content="Starting upload...", view=None)
         self.value = True

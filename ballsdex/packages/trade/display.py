@@ -26,12 +26,12 @@ class TradeViewFormat(menus.ListPageSource):
         self.is_admin = is_admin
         super().__init__(entries, per_page=1)
 
-    async def format_page(self, menu: Pages, page: TradeModel) -> discord.Embed:
+    async def format_page(self, menu: Pages, trade: TradeModel) -> discord.Embed:
         embed = discord.Embed(
             title=f"Trade history for {self.header}",
-            description=f"Trade ID: {page.pk:0X}",
+            description=f"Trade ID: {trade.pk:0X}",
             url=self.url if self.is_admin else None,
-            timestamp=page.date,
+            timestamp=trade.date,
         )
         embed.set_footer(
             text=f"Trade {menu.current_page + 1}/{menu.source.get_max_pages()} | Trade date: "
@@ -39,8 +39,8 @@ class TradeViewFormat(menus.ListPageSource):
         fill_trade_embed_fields(
             embed,
             self.bot,
-            await TradingUser.from_trade_model(page, page.player1, self.bot, self.is_admin),
-            await TradingUser.from_trade_model(page, page.player2, self.bot, self.is_admin),
+            await TradingUser.from_trade_model(trade, trade.player1, self.bot, self.is_admin),
+            await TradingUser.from_trade_model(trade, trade.player2, self.bot, self.is_admin),
             is_admin=self.is_admin,
         )
         return embed

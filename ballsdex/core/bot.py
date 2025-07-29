@@ -6,16 +6,15 @@ import logging
 import math
 import time
 import types
-from types import SimpleNamespace
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Self, cast
+from typing import TYPE_CHECKING, Self, cast
 
 import aiohttp
 import discord
 import discord.gateway
 from aiohttp import ClientTimeout
 from cachetools import TTLCache
-from discord import app_commands, Client  # Remove 'client' if unused
+from discord import app_commands
 from discord.app_commands.translator import TranslationContextTypes, locale_str
 from discord.enums import Locale
 from discord.ext import commands
@@ -67,19 +66,19 @@ class Translator(app_commands.Translator):
 # observing the duration and status code of HTTP requests through aiohttp TraceConfig
 async def on_request_start(
     session: aiohttp.ClientSession,
-    trace_config_ctx: aiohttp.TraceConfigCtx,
+    trace_ctx: types.SimpleNamespace,
     params: aiohttp.TraceRequestStartParams,
 ):
     # register t1 before sending request
-    setattr(trace_config_ctx, "start", session.loop.time())
+    trace_ctx.start = session.loop.time()
 
 
 async def on_request_end(
     session: aiohttp.ClientSession,
-    trace_config_ctx: aiohttp.TraceConfigCtx,
+    trace_ctx: types.SimpleNamespace,
     params: aiohttp.TraceRequestEndParams,
 ):
-    elapsed = session.loop.time() - getattr(trace_config_ctx, "start", session.loop.time())
+    time = session.loop.time() - trace_ctx.start
 
     # to categorize HTTP calls per path, we need to access the corresponding discord.http.Route
     # object, which is not available in the context of an aiohttp TraceConfig, therefore it's
@@ -93,18 +92,16 @@ async def on_request_end(
         # calling function is HTTPConfig.static_login which has no Route object
         route_key = f"{params.response.method} {params.url.path}"
 
-    http_counter.labels(route_key, params.response.status).observe(elapsed)
+    http_counter.labels(route_key, params.response.status).observe(time)
 
 
 class CommandTree(app_commands.CommandTree):
     disable_time_check: bool = False
 
-    async def interaction_check(
-        self, interaction: discord.Interaction[discord.Client], /
-    ) -> bool:
-        # Optionally cast to BallsDexBot if you need bot-specific attributes
-        bot = interaction.client  # type: ignore
+    async def interaction_check(self, interaction: discord.Interaction[BallsDexBot], /) -> bool:
         # checking if the moment we receive this interaction isn't too late already
+        # there is a 3 seconds limit for initial response, taking a little margin into account
+        # https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
         if not self.disable_time_check:
             delta = datetime.now(tz=interaction.created_at.tzinfo) - interaction.created_at
             if delta.total_seconds() >= 2.8:
@@ -114,6 +111,7 @@ class CommandTree(app_commands.CommandTree):
                 )
                 return False
 
+        bot = interaction.client
         if not bot.is_ready():
             if interaction.type != discord.InteractionType.autocomplete:
                 await interaction.response.send_message(
@@ -122,8 +120,8 @@ class CommandTree(app_commands.CommandTree):
                     ephemeral=True,
                 )
             return False  # wait for all shards to be connected
-        # If you need to call bot.blacklist_check, cast to BallsDexBot:
-        return await cast("BallsDexBot", bot).blacklist_check(cast("discord.Interaction[BallsDexBot]", interaction))
+        return await bot.blacklist_check(interaction)
+
 
 class BallsDexBot(commands.AutoShardedBot):
     """
@@ -155,8 +153,8 @@ class BallsDexBot(commands.AutoShardedBot):
 
         if settings.prometheus_enabled:
             trace = aiohttp.TraceConfig()
-            trace.on_request_start.append(on_request_start)  # type: ignore
-            trace.on_request_end.append(on_request_end)      # type: ignore
+            trace.on_request_start.append(on_request_start)
+            trace.on_request_end.append(on_request_end)
             options["http_trace"] = trace
 
         super().__init__(command_prefix, intents=intents, tree_cls=CommandTree, **options)
@@ -176,9 +174,9 @@ class BallsDexBot(commands.AutoShardedBot):
         self.blacklist_guild: set[int] = set()
         self.catch_log: set[int] = set()
         self.command_log: set[int] = set()
-        self.locked_balls: TTLCache[int, Any] = TTLCache(maxsize=99999, ttl=60 * 30)
+        self.locked_balls = TTLCache(maxsize=99999, ttl=60 * 30)
 
-        self.owner_ids: set[int] = set()  # type: ignore[assignment]
+        self.owner_ids: set[int]
 
     async def start_prometheus_server(self):
         self.prometheus_server = PrometheusServer(
