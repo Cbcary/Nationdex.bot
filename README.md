@@ -18,7 +18,7 @@ For help installing the bot, questions, suggestions to improve or contributions,
 
 **Ballsdex Official Server:**
 
-[![Discord server](https://discord.com/api/guilds/1118965941221466194/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
+[![Discord server](https://discord.com/api/guilds/1049118743101452329/embed.png?style=banner2)](https://discord.gg/tKh3n5uVnm)
 
 Ariel Aram is banned from Ballsdex server under immediate decision from **thebicfish** to take strict measures for the last involvement of both of them and some other people in the AsiaDex drama on September 2024, but we are still providing the Ballsdex official server due to our explicit association with Ballsdex.
 
