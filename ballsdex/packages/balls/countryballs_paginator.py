@@ -17,9 +17,9 @@ class CountryballsSource(menus.ListPageSource):
     def __init__(self, entries: List[BallInstance]):
         super().__init__(entries, per_page=25)
 
-    async def format_page(self, menu: CountryballsSelector, page: List[BallInstance]):
-        menu.set_options(page)
-        return "Page updated."
+    async def format_page(self, menu: CountryballsSelector, balls: List[BallInstance]):
+        menu.set_options(balls)
+        return True  # signal to edit the page
 
 
 class CountryballsSelector(Pages):
@@ -78,9 +78,9 @@ class DuplicateSource(menus.ListPageSource):
     def __init__(self, entries: List[str]):
         super().__init__(entries, per_page=25)
 
-    async def format_page(self, menu, page):
-        menu.set_options(page)
-        return "Page updated."
+    async def format_page(self, menu, items):
+        menu.set_options(items)
+        return True  # signal to edit the page
 
 
 class DuplicateViewMenu(Pages):

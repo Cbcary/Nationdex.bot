@@ -2,7 +2,7 @@ import logging
 import time
 from datetime import timedelta
 from enum import Enum
-from typing import TYPE_CHECKING, Generic, Iterable, Optional, TypeVar, cast
+from typing import TYPE_CHECKING, Generic, Iterable, Optional, TypeVar
 
 import discord
 from discord import app_commands
@@ -113,44 +113,37 @@ class ModelTransformer(app_commands.Transformer, Generic[T]):
         raise NotImplementedError()
 
     async def autocomplete(
-        self, interaction: Interaction[discord.Client], value: str | int | float
-    ) -> list[app_commands.Choice[str | int | float]]:
-        # Cast to the specific type we need
-        typed_interaction = cast(Interaction["BallsDexBot"], interaction)
-        value_str = str(value)  # Convert to string for processing
-        
+        self, interaction: Interaction["BallsDexBot"], value: str
+    ) -> list[app_commands.Choice[int]]:
         t1 = time.time()
         choices: list[app_commands.Choice[int]] = []
-        for option in await self.get_options(typed_interaction, value_str):
+        for option in await self.get_options(interaction, value):
             choices.append(option)
         t2 = time.time()
         log.debug(
             f"{self.name.title()} autocompletion took "
             f"{round((t2 - t1) * 1000)}ms, {len(choices)} results"
         )
-        return choices  # type: ignore
+        return choices
 
-    async def transform(self, interaction: Interaction[discord.Client], value: str) -> T | None:
-        # Cast to the specific type we need
-        typed_interaction = cast(Interaction["BallsDexBot"], interaction)
-        
+    async def transform(self, interaction: Interaction["BallsDexBot"], value: str) -> T | None:
         if not value:
-            await typed_interaction.response.send_message(
+            await interaction.response.send_message(
                 "You need to use the autocomplete function for the economy selection."
             )
             return None
         try:
             instance = await self.get_from_pk(int(value, self.base))
-            await self.validate(typed_interaction, instance)
+            await self.validate(interaction, instance)
         except (DoesNotExist, KeyError, ValueError):
-            await typed_interaction.response.send_message(
+            await interaction.response.send_message(
                 f"The {self.name} could not be found. Make sure to use the autocomplete "
                 "function on this command.",
                 ephemeral=True,
             )
             return None
         except ValidationError as e:
-            await typed_interaction.response.send_message(e.message, ephemeral=True)
+            await interaction.response.send_message(e.message, ephemeral=True)
             return None
         else:
             return instance
@@ -250,14 +243,14 @@ class TTLModelTransformer(ModelTransformer[T]):
 
     async def get_options(
         self, interaction: Interaction["BallsDexBot"], value: str
-    ) -> list[app_commands.Choice[int]]:
+    ) -> list[app_commands.Choice[str]]:
         await self.maybe_refresh()
 
         i = 0
-        choices: list[app_commands.Choice[int]] = []
+        choices: list[app_commands.Choice] = []
         for item in self.items.values():
             if value.lower() in self.search_map[item]:
-                choices.append(app_commands.Choice(name=self.key(item), value=item.pk))
+                choices.append(app_commands.Choice(name=self.key(item), value=str(item.pk)))
                 i += 1
                 if i == 25:
                     break

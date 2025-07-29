@@ -69,6 +69,7 @@ pyinstrument, allowing you to profile a page by appending `?profile` at the end.
 > - `check` performs general system checks to ensure everything works
 > - `createsuperuser` creates a superuser account
 > - `showmigrations` shows the applied/missing migrations
+
 > [!WARNING]
 > Do not use `python3 manage.py runserver` to run the server, since the bot relies on async code.
 > Django must be started with an ASGI server, not the default WSGI.
@@ -95,7 +96,7 @@ Then you can run `python3 manage.py makemigrations` to generate a migration file
 contents to ensure there is only what you modified, and commit it.
 
 You can read more about migrations
-[via this link](https://docs.djangoproject.com/en/5.1/topics/migrations/), the engine is very extensive!
+[here](https://docs.djangoproject.com/en/5.1/topics/migrations/), the engine is very extensive!
 
 ## Coding style
 
@@ -112,4 +113,5 @@ You can also run them manually:
 pre-commit run -a
 ```
 
-All rules are defined in `pyproject.toml`, meaning your editor will pick them up if you install the right tools.
+All rules are defined in `pyproject.toml`, meaning your editor will pick them up if you install
+the right tools.
