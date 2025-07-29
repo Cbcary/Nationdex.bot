@@ -3,13 +3,6 @@
 
 {% block extrastyle %}{{ block.super }}
 <link rel="stylesheet" href="{% static "admin/css/override.css" %}">
-<style>
-.login-form {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-}
-</style>
 {% endblock %}
 
 {% block content %}
@@ -38,7 +31,7 @@
 </p>
 {% endif %}
 
-<form action="{{ app_path }}" method="post" id="login-form"{% if not pwlogin %} style="display:none; padding:0 0 2em 0;"{% else %} style="padding:0 0 2em 0;"{% endif %}>{% csrf_token %}
+<form action="{{ app_path }}" method="post" id="login-form" style="{% if not pwlogin %}display:none;{% endif %}padding:0 0 2em 0;">{% csrf_token %}
   <div class="form-row">
     {{ form.username.errors }}
     {{ form.username.label_tag }} {{ form.username }}

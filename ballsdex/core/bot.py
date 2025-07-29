@@ -67,7 +67,7 @@ class Translator(app_commands.Translator):
 # observing the duration and status code of HTTP requests through aiohttp TraceConfig
 async def on_request_start(
     session: aiohttp.ClientSession,
-    trace_config_ctx: SimpleNamespace,
+    trace_config_ctx: aiohttp.TraceConfigCtx,
     params: aiohttp.TraceRequestStartParams,
 ):
     # register t1 before sending request
@@ -76,7 +76,7 @@ async def on_request_start(
 
 async def on_request_end(
     session: aiohttp.ClientSession,
-    trace_config_ctx: SimpleNamespace,
+    trace_config_ctx: aiohttp.TraceConfigCtx,
     params: aiohttp.TraceRequestEndParams,
 ):
     elapsed = session.loop.time() - getattr(trace_config_ctx, "start", session.loop.time())
@@ -103,7 +103,7 @@ class CommandTree(app_commands.CommandTree):
         self, interaction: discord.Interaction[discord.Client], /
     ) -> bool:
         # Optionally cast to BallsDexBot if you need bot-specific attributes
-        bot = cast("BallsDexBot", interaction.client)
+        bot = interaction.client  # type: ignore
         # checking if the moment we receive this interaction isn't too late already
         if not self.disable_time_check:
             delta = datetime.now(tz=interaction.created_at.tzinfo) - interaction.created_at
@@ -116,13 +116,9 @@ class CommandTree(app_commands.CommandTree):
 
         if not bot.is_ready():
             if interaction.type != discord.InteractionType.autocomplete:
-                # Calculate percentage safely, handling potential None values
-                shard_count = bot.shard_count or 1
-                current_shards = len(bot.shards) if bot.shards else 0
-                percentage = round((current_shards / shard_count) * 100)
                 await interaction.response.send_message(
                     "The bot is currently starting, please wait for a few minutes... "
-                    f"({percentage}%)",
+                    f"({round((len(bot.shards) / bot.shard_count) * 100)}%)",
                     ephemeral=True,
                 )
             return False  # wait for all shards to be connected

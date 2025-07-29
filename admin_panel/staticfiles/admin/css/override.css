@@ -1,3 +1,6 @@
+.discord-row {
+}
+
 .discord-row a.discord-button {
     background: #5865F2;
     display: flex;
@@ -8,7 +11,7 @@
 }
 
 .discord-row a.discord-button:hover {
-    background: color-mix(in srgb, #5865F2, black 30%);
+    background: color-mix(in srgb, #5865F2, black 30%)
 }
 
 .discord-button * {

@@ -123,8 +123,8 @@ class Merge(commands.Cog):
         ability = gen_text(ball1.countryball.capacity_name + '. ' + ball2.countryball.capacity_name, 1, 3)
         desc = gen_text(ball1.countryball.capacity_description + '. ' + ball2.countryball.capacity_description, 1, 7)
 
-        collection1 = Image.open(os.path.join(os.getcwd(), ball1.countryball.collection_card)).resize((1366, 768))
-        collection2 = Image.open(os.path.join(os.getcwd(), ball2.countryball.collection_card)).resize((1366, 768))
+        collection1 = Image.open(os.getcwd() + ball1.countryball.collection_card).resize((1366, 768))
+        collection2 = Image.open(os.getcwd() + ball2.countryball.collection_card).resize((1366, 768))
 
         left = collection1.crop((0, 0, 683, 768))
         right = collection2.crop((683, 0, 1366, 768))
